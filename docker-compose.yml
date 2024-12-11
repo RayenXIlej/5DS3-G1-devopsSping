@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0  # Utilise la version de MySQL 8.0
+    container_name: devopsSpring_5DS3_G1-db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"  # Permet à MySQL de démarrer sans mot de passe
+      MYSQL_DATABASE: devops  # Nom de la base de données
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql  # Monte le volume pour persister les données de MySQL
+    networks:
+      - app-network
+    restart: unless-stopped  # Maintient le conteneur en cours d'exécution sauf arrêt explicite
+
+  app:
+    image: rayenxilej/devspring:1.0.31  # Remplace ${BUILD_NUMBER} par le tag approprié ou utilise 'latest'
+    container_name: devopsSpring_5DS3_G1-app
+    ports:
+      - "8089:8089"  # Mappe le port 8089 de l'hôte vers le conteneur
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/devops?createDatabaseIfNotExist=true
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=  # Pas de mot de passe
+    depends_on:
+      - mysql
+    networks:
+      - app-network
+    restart: on-failure  # Redémarre le conteneur uniquement en cas d'échec
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
