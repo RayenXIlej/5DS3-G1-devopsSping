@@ -16,7 +16,7 @@ services:
     restart: unless-stopped  # Maintient le conteneur en cours d'exécution sauf arrêt explicite
 
   app:
-    image: rayenxilej/eventsproject:1.0.75  # Remplace ${BUILD_NUMBER} par le tag approprié ou utilise 'latest'
+    image: rayenxilej/eventsproject:1.0.80  # Remplace ${BUILD_NUMBER} par le tag approprié ou utilise 'latest'
     container_name: eventsProject-app
     ports:
       - "8089:8089"  # Mappe le port 8089 de l'hôte vers le conteneur
