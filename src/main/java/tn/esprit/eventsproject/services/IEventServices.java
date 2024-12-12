@@ -14,4 +14,5 @@ public interface IEventServices {
     public Logistics addAffectLog(Logistics logistics, String descriptionEvent);
     public List<Logistics> getLogisticsDates(LocalDate date_debut, LocalDate date_fin);
     public void calculCout();
+    public List<Event> getAll();
 }
