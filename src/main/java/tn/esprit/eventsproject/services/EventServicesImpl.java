@@ -122,4 +122,9 @@ public class EventServicesImpl implements IEventServices{
         return eventRepository.findAll();
     }
 
+    @Override
+    public List<Participant> getAllParticipant() {
+        return participantRepository.findAll();
+    }
+
 }

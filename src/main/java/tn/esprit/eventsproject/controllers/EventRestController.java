@@ -20,6 +20,11 @@ public class EventRestController {
     public Participant addParticipant(@RequestBody Participant participant){
         return eventServices.addParticipant(participant);
     }
+
+    @GetMapping("/getParticipants")
+    public List<Participant> getListParticipant(){
+        return eventServices.getAllParticipant();
+    }
     @PostMapping("/addEvent/{id}")
     public Event addEventPart(@RequestBody Event event, @PathVariable("id") int idPart){
         return eventServices.addAffectEvenParticipant(event, idPart);
